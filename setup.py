@@ -20,10 +20,12 @@ setup(
     long_description=read('README.rst'),
     install_requires=[
         'librarian_core',
+        'librarian_setup',
         'librarian_dashboard',
     ],
     dependency_links=[
         'git+ssh://git@github.com/Outernet-Project/librarian-core.git#egg=librarian_core-0.1',
+        'git+ssh://git@github.com/Outernet-Project/librarian-setup.git#egg=librarian_setup-0.1',
         'git+ssh://git@github.com/Outernet-Project/librarian-dashboard.git#egg=librarian_dashboard-0.1',
     ],
     classifiers=[

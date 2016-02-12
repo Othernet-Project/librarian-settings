@@ -22,7 +22,7 @@ class SettingsDashboardPlugin(DashboardPlugin):
     name = 'settings'
 
     def get_template(self):
-        return 'dashboard/' + self.name
+        return '{}/dashboard'.format(self.name)
 
     def get_context(self):
         settings = request.app.supervisor.exts.settings

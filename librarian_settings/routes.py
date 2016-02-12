@@ -10,7 +10,8 @@ from librarian_core.contrib.templates.renderer import template
 def show_settings_form():
     settings = request.app.supervisor.exts.settings
     form_cls = settings.get_form()
-    return dict(form=form_cls())
+    return dict(form=form_cls(),
+                groups=settings.groups)
 
 
 @roca_view('settings/settings', 'settings/_settings_form',
@@ -20,9 +21,11 @@ def save_settings():
     form_cls = settings.get_form()
     form = form_cls(request.forms)
     if not form.is_valid():
-        return dict(form=form)
+        return dict(form=form, groups=settings.groups)
 
+    request.app.supervisor.exts.setup.append(form.processed_data)
     return dict(form=form,
+                groups=settings.groups,
                 message=_('Settings saved.'),
                 redirect_url=i18n_url('dashboard:main'))
 

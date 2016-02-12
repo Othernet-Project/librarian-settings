@@ -11,7 +11,7 @@ class Group(dict):
 
 
 class SettingsManager(object):
-    _field_template = '{group}_{name}'
+    _field_template = '{group}.{name}'
     _select_type = 'select'
     _date_type = 'date'
     _field_types = {
@@ -24,8 +24,10 @@ class SettingsManager(object):
         _date_type: form.DateField,
     }
 
-    def __init__(self):
+    def __init__(self, supervisor):
+        self._supervisor = supervisor
         self._groups = dict()
+        self._settings = dict()
 
     groups = property(lambda self: ((name, group.label)
                                     for (name, group) in self._groups.items()))
@@ -64,10 +66,12 @@ class SettingsManager(object):
                 name = self._field_template.format(group=group_name,
                                                    name=field_name)
                 field_cls = self._field_types[options['value_type']]
-                validators = ([form.Required()], [])[options['required']]
+                validators = ([], [form.Required()])[options['required']]
+                # actual value from config overrides default value
+                value = self._supervisor.config.get(name, options['default'])
                 kwargs = dict(label=options['label'],
                               validators=validators,
-                              value=options['default'])
+                              value=value)
                 if options['value_type'] == self._select_type:
                     kwargs['choices'] = options['choices']
 
