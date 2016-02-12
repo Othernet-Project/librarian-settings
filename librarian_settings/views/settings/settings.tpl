@@ -7,5 +7,7 @@ ${_('Librarian settings')}
 </%block>
 
 <div class="settings">
-    ${settings_form.body()}
+    ${h.form('post', action=i18n_url('settings:save'), tabindex=2, id="settings-form")}
+        ${settings_form.body()}
+    </form>
 </div>
