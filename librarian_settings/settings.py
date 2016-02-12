@@ -70,13 +70,17 @@ class SettingsManager(object):
                 # actual value from config overrides default value
                 value = self._supervisor.config.get(name, options['default'])
                 kwargs = dict(label=options['label'],
-                              validators=validators,
-                              value=value)
+                              validators=validators)
                 if options['value_type'] == self._select_type:
                     kwargs['choices'] = options['choices']
 
-                field = field_cls(**kwargs)
-                attrs[name] = field
+                if options['value_type'] is bool:
+                    kwargs['default'] = value
+                    kwargs['value'] = name
+                else:
+                    kwargs['value'] = value
+
+                attrs[name] = field_cls(**kwargs)
 
         return type('SettingsForm', (form.Form,), attrs)
 
