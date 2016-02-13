@@ -1,0 +1,12 @@
+@import "base/params";
+
+.settings {
+  .group {
+    padding: 1em;
+    border: $o-separator-border;
+    margin-bottom: 1em;
+    .group-title {
+      text-transform: uppercase;
+    }
+  }
+}
