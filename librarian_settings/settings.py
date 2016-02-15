@@ -38,8 +38,8 @@ class SettingsManager(object):
 
         self._groups[name] = Group.create(label)
 
-    def add_field(self, name, group, label, value_type, required=False,
-                  default=None, choices=None):
+    def add_field(self, name, group, label, value_type, help_text=None,
+                  required=False, default=None, choices=None):
         if group not in self._groups:
             raise ValueError("Group {} not registered.".format(group))
 
@@ -55,6 +55,7 @@ class SettingsManager(object):
 
         self._groups[group][name] = dict(label=label,
                                          value_type=value_type,
+                                         help_text=help_text,
                                          required=bool(required),
                                          default=default,
                                          choices=choices)
@@ -70,6 +71,7 @@ class SettingsManager(object):
                 # actual value from config overrides default value
                 value = self._supervisor.config.get(name, options['default'])
                 kwargs = dict(label=options['label'],
+                              help_text=options['help_text'],
                               validators=validators)
                 if options['value_type'] == self._select_type:
                     kwargs['choices'] = options['choices']
