@@ -8,11 +8,14 @@
 /* line 4, ../../../src/scss/dashboard_settings.scss */
 .settings .group {
   border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
   padding-top: 1rem;
   margin-bottom: 1em;
 }
-/* line 10, ../../../src/scss/dashboard_settings.scss */
+/* line 9, ../../../src/scss/dashboard_settings.scss */
+.settings .group:last-child {
+  border-bottom: 1px solid #ddd;
+}
+/* line 13, ../../../src/scss/dashboard_settings.scss */
 .settings .group .group-title {
   text-transform: uppercase;
   padding-right: 1rem;
