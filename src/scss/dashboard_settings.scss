@@ -2,11 +2,14 @@
 
 .settings {
   .group {
-    padding: 1em;
-    border: $o-separator-border;
+    border-top: $o-separator-border;
+    border-bottom: $o-separator-border;
+    padding-top: 1rem;
     margin-bottom: 1em;
+
     .group-title {
       text-transform: uppercase;
+      padding-right: 1rem;
     }
   }
 }
