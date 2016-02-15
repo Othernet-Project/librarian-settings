@@ -9,7 +9,11 @@
 
 <script type="text/template" id="settingsSaveError">
     <% 
+    # Translators, error message when settings cannot be saved
     errors = [_('Settings could not be set due to application error.')] 
     %>
     ${forms.form_errors(errors)}
+</script>
+<script type="text/template" id="settingsSaveOK">
+    <p class="o-form-message">${_('Settings were saved.')}</p>
 </script>

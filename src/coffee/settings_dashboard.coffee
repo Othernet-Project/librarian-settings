@@ -3,6 +3,8 @@
   form = $ '#settings-form'
   url = form.attr 'action'
   errorMessage = templates.settingsSaveError
+  successMessage = templates.settingsSaveOK
+  win = $ window
 
 
   removeMessage = () ->
@@ -14,7 +16,9 @@
     res = $.post url, data
     res.done (data) ->
       form.html data
-      ($ window).trigger 'settings-saved'
+      form.prepend successMessage
+      (form.parents '.o-collapsible-section').trigger 'remax'
+      win.trigger 'settings-saved'
       setTimeout removeMessage, 5000
     res.fail () ->
       form.prepend errorMessage
@@ -24,6 +28,5 @@
     e.preventDefault()
     data = form.serialize()
     submitData data
-
 
 ) this, this.jQuery, this.templates
