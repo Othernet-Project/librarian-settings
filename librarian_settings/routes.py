@@ -24,6 +24,8 @@ def save_settings():
         return dict(form=form, groups=settings.groups)
 
     request.app.supervisor.exts.setup.append(form.processed_data)
+    request.app.supervisor.exts.events.publish('SETTINGS_SAVED',
+                                               form.processed_data)
     return dict(form=form,
                 groups=settings.groups,
                 message=_('Settings saved.'),
